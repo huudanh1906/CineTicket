@@ -42,7 +42,7 @@ This is the backend API for the CineTicket cinema ticket booking application.
 To create the database and apply migrations, run the following commands:
 
 ```bash
-cd CineTicket.API
+cd backend
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
@@ -50,7 +50,7 @@ dotnet ef database update
 ### Running the API
 
 ```bash
-cd CineTicket.API
+cd backend
 dotnet run
 ```
 
