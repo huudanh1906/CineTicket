@@ -67,8 +67,13 @@ const BookingService = {
     },
 
     processPayment: async (data: PaymentRequest): Promise<any> => {
-        const response = await api.post('/Bookings/payment', data);
-        return response.data;
+        try {
+            const response = await api.post('/Bookings/simple-payment', data);
+            return response.data;
+        } catch (error: any) {
+            console.error('Payment API error:', error.response?.data || error);
+            throw error;
+        }
     },
 
     cancelBooking: async (id: number): Promise<void> => {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2025 at 09:00 AM
+-- Generation Time: May 06, 2025 at 08:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,8 +49,8 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`Id`, `CreatedAt`, `TotalAmount`, `BookingStatus`, `PaymentStatus`, `PaymentReference`, `UserId`, `ScreeningId`, `CreatedById`, `UpdatedAt`, `UpdatedById`, `PaidAt`, `PaymentMethod`, `TransactionId`) VALUES
-(3, '2025-04-16 19:39:39.527559', 200000.00, 'Confirmed', 'Completed', NULL, 8, 1, 8, '2025-04-16 19:40:15.275761', 8, '2025-04-16 19:40:15.275634', NULL, NULL),
-(4, '2025-04-19 10:57:28.794460', 200000.00, 'Pending', 'Pending', NULL, 8, 5, 8, NULL, NULL, NULL, NULL, NULL);
+(19, '2025-05-06 13:34:33.434848', 100000.00, 'Confirmed', 'Paid', NULL, 14, 6, 14, '2025-05-06 13:34:43.532786', 14, '2025-05-06 13:34:43.532783', 'banking', 'TRX-20250506-1e6c6316'),
+(21, '2025-05-06 13:41:47.506144', 200000.00, 'Cancelled', 'Pending', NULL, 14, 6, 14, '2025-05-06 13:41:47.594297', 14, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -70,10 +70,9 @@ CREATE TABLE `bookingseats` (
 --
 
 INSERT INTO `bookingseats` (`Id`, `BookingId`, `SeatId`, `CreatedAt`) VALUES
-(3, 3, 414, '2025-04-16 19:39:39.566467'),
-(4, 3, 415, '2025-04-16 19:39:39.566467'),
-(5, 4, 865, '2025-04-19 10:57:28.807331'),
-(6, 4, 866, '2025-04-19 10:57:28.807331');
+(29, 19, 416, '2025-05-06 13:34:33.436790'),
+(31, 21, 402, '2025-05-06 13:41:47.507976'),
+(32, 21, 403, '2025-05-06 13:41:47.507976');
 
 -- --------------------------------------------------------
 
@@ -191,11 +190,9 @@ CREATE TABLE `screenings` (
 --
 
 INSERT INTO `screenings` (`Id`, `StartTime`, `EndTime`, `Price`, `MovieId`, `CinemaHallId`, `CreatedAt`, `CreatedById`, `UpdatedAt`, `UpdatedById`, `Status`) VALUES
-(1, '2025-04-16 19:55:00.000000', '2025-04-16 21:55:00.000000', 100000, 5, 2, '2025-04-16 19:18:23.640475', 8, '2025-04-16 20:23:46.769875', NULL, 'expired'),
-(2, '2025-04-27 14:30:00.000000', '2025-04-27 16:30:00.000000', 80000, 5, 3, '2025-04-16 19:18:30.321335', 8, '2025-04-19 07:46:05.590708', 8, 'upcoming'),
-(3, '2025-04-27 17:00:00.000000', '2025-04-27 19:00:00.000000', 100000, 5, 2, '2025-04-16 19:18:42.509918', 8, NULL, NULL, 'upcoming'),
-(4, '2025-04-19 19:30:00.000000', '2025-04-19 21:26:00.000000', 120000, 16, 5, '2025-04-19 07:47:22.167612', 8, NULL, NULL, 'upcoming'),
-(5, '2025-04-19 13:00:00.000000', '2025-04-19 15:08:00.000000', 100000, 17, 5, '2025-04-19 10:56:33.514124', 8, NULL, NULL, 'upcoming');
+(3, '2025-04-27 17:00:00.000000', '2025-04-27 19:00:00.000000', 100000, 5, 2, '2025-04-16 19:18:42.509918', 8, '2025-05-06 11:29:26.323187', NULL, 'expired'),
+(4, '2025-04-19 19:30:00.000000', '2025-04-19 21:26:00.000000', 120000, 16, 5, '2025-04-19 07:47:22.167612', 8, '2025-05-06 11:29:26.323187', NULL, 'expired'),
+(6, '2025-05-06 16:31:00.000000', '2025-05-06 19:31:00.000000', 100000, 6, 2, '2025-05-06 11:32:18.662838', 8, NULL, NULL, 'upcoming');
 
 -- --------------------------------------------------------
 
@@ -705,13 +702,13 @@ ALTER TABLE `__efmigrationshistory`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `bookingseats`
 --
 ALTER TABLE `bookingseats`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `cinemahalls`
@@ -735,7 +732,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT for table `screenings`
 --
 ALTER TABLE `screenings`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `seats`

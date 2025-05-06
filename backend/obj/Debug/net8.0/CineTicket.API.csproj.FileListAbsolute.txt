@@ -106,3 +106,4 @@ D:\CineTicket\backend\obj\Debug\net8.0\refint\CineTicket.API.dll
 D:\CineTicket\backend\obj\Debug\net8.0\CineTicket.API.pdb
 D:\CineTicket\backend\obj\Debug\net8.0\CineTicket.API.genruntimeconfig.cache
 D:\CineTicket\backend\obj\Debug\net8.0\ref\CineTicket.API.dll
+D:\CineTicket\backend\obj\Debug\net8.0\CineTicket.API.sourcelink.json
