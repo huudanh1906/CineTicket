@@ -70,6 +70,7 @@ namespace Controllers.Admin
                 m.Description,
                 m.Genre,
                 m.ReleaseDate,
+                m.EndDate,
                 m.DurationMinutes,
                 m.Rating,
                 m.PosterUrl,

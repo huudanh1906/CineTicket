@@ -12,6 +12,7 @@ interface Movie {
     title: string;
     durationMinutes: number;
     releaseDate: string;
+    endDate?: string;
 }
 
 interface Cinema {
@@ -104,7 +105,15 @@ const ScreeningFormPage: React.FC = () => {
         try {
             // Fetch movies for dropdown
             const moviesData = await MoviesService.getMovies('', 1, 100);
-            setMovies(moviesData.movies);
+
+            // Filter out movies that have passed their end date
+            const currentDate = new Date();
+            const validMovies = moviesData.movies.filter((movie: Movie) => {
+                // If movie has no endDate, or endDate is in the future, it's valid
+                return !movie.endDate || new Date(movie.endDate) >= currentDate;
+            });
+
+            setMovies(validMovies);
 
             // Fetch cinemas for dropdown
             const cinemasData = await CinemasService.getCinemas('', 1, 100);
@@ -258,12 +267,24 @@ const ScreeningFormPage: React.FC = () => {
             return false;
         }
 
-        // If movie is selected, check if start time is after release date
-        if (selectedMovie && selectedMovie.releaseDate) {
-            const releaseDate = new Date(selectedMovie.releaseDate);
-            if (startTime < releaseDate) {
-                setError(`Start time must be on or after the movie's release date (${releaseDate.toLocaleDateString()})`);
-                return false;
+        // If movie is selected, check validity constraints
+        if (selectedMovie) {
+            // Check if start time is after release date
+            if (selectedMovie.releaseDate) {
+                const releaseDate = new Date(selectedMovie.releaseDate);
+                if (startTime < releaseDate) {
+                    setError(`Start time must be on or after the movie's release date (${releaseDate.toLocaleDateString()})`);
+                    return false;
+                }
+            }
+
+            // Check if start time is before end date (if set)
+            if (selectedMovie.endDate) {
+                const endDate = new Date(selectedMovie.endDate);
+                if (startTime > endDate) {
+                    setError(`Start time must be before the movie's end date (${endDate.toLocaleDateString()})`);
+                    return false;
+                }
             }
         }
 
@@ -389,6 +410,9 @@ const ScreeningFormPage: React.FC = () => {
                                     <div className="mt-2 text-sm text-gray-600">
                                         <p>Duration: {selectedMovie.durationMinutes} minutes</p>
                                         <p>Release Date: {new Date(selectedMovie.releaseDate).toLocaleDateString()}</p>
+                                        {selectedMovie.endDate && (
+                                            <p>End Date: {new Date(selectedMovie.endDate).toLocaleDateString()}</p>
+                                        )}
                                     </div>
                                 )}
                             </div>

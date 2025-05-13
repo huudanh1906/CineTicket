@@ -245,7 +245,7 @@ namespace Controllers
             }
 
             // Check if booking is already paid
-            if (booking.PaymentStatus == "Paid")
+            if (booking.PaymentStatus == "Completed")
             {
                 return BadRequest("Booking is already paid");
             }
@@ -266,7 +266,7 @@ namespace Controllers
             }
 
             // Update booking status
-            booking.PaymentStatus = "Paid";
+            booking.PaymentStatus = "Completed";
             booking.BookingStatus = "Confirmed";
             booking.TransactionId = paymentDto.TransactionReference;
             booking.PaymentMethod = paymentDto.PaymentMethod;
@@ -417,7 +417,7 @@ namespace Controllers
             }
 
             // Check if booking is already paid
-            if (booking.PaymentStatus == "Paid")
+            if (booking.PaymentStatus == "Completed")
             {
                 return BadRequest("Booking is already paid");
             }
@@ -446,7 +446,7 @@ namespace Controllers
             }
 
             // Update booking status
-            booking.PaymentStatus = "Paid";
+            booking.PaymentStatus = "Completed";
             booking.BookingStatus = "Confirmed";
             booking.TransactionId = fullPaymentDto.TransactionReference;
             booking.PaymentMethod = paymentDto.PaymentMethod;

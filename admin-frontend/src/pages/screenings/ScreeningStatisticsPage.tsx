@@ -38,10 +38,10 @@ const ScreeningStatisticsPage: React.FC = () => {
 
     // Helper function to format currency
     const formatCurrency = (amount: number) => {
-        return new Intl.NumberFormat('en-US', {
+        return new Intl.NumberFormat('vi-VN', {
             style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 2
+            currency: 'VND',
+            maximumFractionDigits: 0
         }).format(amount);
     };
 
@@ -83,24 +83,18 @@ const ScreeningStatisticsPage: React.FC = () => {
                                     <Film size={24} />
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-600 uppercase">Total Screenings</p>
+                                    <p className="text-sm text-gray-600 uppercase">TOTAL SCREENINGS</p>
                                     <p className="text-2xl font-bold text-gray-800">{statistics.totalScreenings}</p>
                                 </div>
                             </div>
-                            <div className="mt-4">
-                                <div className="flex justify-between mb-1">
-                                    <span className="text-xs text-gray-500">Past</span>
-                                    <span className="text-xs text-gray-500">Upcoming</span>
+                            <div className="mt-4 grid grid-cols-2 gap-2">
+                                <div className="bg-gray-50 p-2 rounded-md">
+                                    <p className="text-xs text-gray-500 uppercase">Past</p>
+                                    <p className="text-lg font-semibold">{statistics.pastScreenings}</p>
                                 </div>
-                                <div className="w-full bg-gray-200 rounded-full h-2">
-                                    <div
-                                        className="bg-indigo-600 h-2 rounded-full"
-                                        style={{ width: `${calculatePercentage(statistics.pastScreenings, statistics.totalScreenings)}%` }}
-                                    ></div>
-                                </div>
-                                <div className="flex justify-between mt-1">
-                                    <span className="text-xs text-gray-500">{statistics.pastScreenings}</span>
-                                    <span className="text-xs text-gray-500">{statistics.upcomingScreenings}</span>
+                                <div className="bg-gray-50 p-2 rounded-md">
+                                    <p className="text-xs text-gray-500 uppercase">Upcoming</p>
+                                    <p className="text-lg font-semibold">{statistics.upcomingScreenings}</p>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +106,7 @@ const ScreeningStatisticsPage: React.FC = () => {
                                     <Bookmark size={24} />
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-600 uppercase">Booked Screenings</p>
+                                    <p className="text-sm text-gray-600 uppercase">BOOKED SCREENINGS</p>
                                     <p className="text-2xl font-bold text-gray-800">{statistics.bookedScreenings}</p>
                                 </div>
                             </div>
@@ -142,7 +136,7 @@ const ScreeningStatisticsPage: React.FC = () => {
                                     <Tag size={24} />
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-600 uppercase">Sold Tickets</p>
+                                    <p className="text-sm text-gray-600 uppercase">SOLD TICKETS</p>
                                     <p className="text-2xl font-bold text-gray-800">{statistics.soldTicketsCount}</p>
                                 </div>
                             </div>
@@ -150,7 +144,7 @@ const ScreeningStatisticsPage: React.FC = () => {
                                 <div className="flex items-center">
                                     <Calendar size={16} className="text-gray-500 mr-2" />
                                     <span className="text-sm text-gray-600">
-                                        {statistics.bookingsToday} tickets sold today
+                                        {statistics.soldTicketsCount} tickets sold
                                     </span>
                                 </div>
                             </div>
@@ -163,7 +157,7 @@ const ScreeningStatisticsPage: React.FC = () => {
                                     <DollarSign size={24} />
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-600 uppercase">Total Revenue</p>
+                                    <p className="text-sm text-gray-600 uppercase">TOTAL REVENUE</p>
                                     <p className="text-2xl font-bold text-gray-800">{formatCurrency(statistics.totalRevenue)}</p>
                                 </div>
                             </div>
@@ -184,7 +178,7 @@ const ScreeningStatisticsPage: React.FC = () => {
                                     <Clock size={24} />
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-600 uppercase">Upcoming Screenings</p>
+                                    <p className="text-sm text-gray-600 uppercase">UPCOMING SCREENINGS</p>
                                     <p className="text-2xl font-bold text-gray-800">{statistics.upcomingScreenings}</p>
                                 </div>
                             </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2025 at 08:42 AM
+-- Generation Time: May 13, 2025 at 06:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,7 +49,7 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`Id`, `CreatedAt`, `TotalAmount`, `BookingStatus`, `PaymentStatus`, `PaymentReference`, `UserId`, `ScreeningId`, `CreatedById`, `UpdatedAt`, `UpdatedById`, `PaidAt`, `PaymentMethod`, `TransactionId`) VALUES
-(19, '2025-05-06 13:34:33.434848', 100000.00, 'Confirmed', 'Paid', NULL, 14, 6, 14, '2025-05-06 13:34:43.532786', 14, '2025-05-06 13:34:43.532783', 'banking', 'TRX-20250506-1e6c6316'),
+(19, '2025-05-06 13:34:33.434848', 100000.00, 'Confirmed', 'Completed', NULL, 14, 6, 14, '2025-05-06 13:34:43.532786', 14, '2025-05-06 13:34:43.532783', 'banking', 'TRX-20250506-1e6c6316'),
 (21, '2025-05-06 13:41:47.506144', 200000.00, 'Cancelled', 'Pending', NULL, 14, 6, 14, '2025-05-06 13:41:47.594297', 14, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -159,7 +159,7 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`Id`, `Title`, `Description`, `PosterUrl`, `BackdropUrl`, `Genre`, `ReleaseDate`, `DurationMinutes`, `Rating`, `CreatedAt`, `CreatedById`, `UpdatedAt`, `UpdatedById`, `EndDate`, `TrailerUrl`) VALUES
-(5, 'Nụ Hôn Bạc Tỷ', 'Câu chuyện xoay quanh Vân - cô gái bán bánh mì vô tình gặp phải hai chàng trai trong một tai nạn nhỏ. Làm thế nào khi tiếng sét ái tình đánh một lúc cả ba người? Liệu giữa một chàng trai chững chạc, nam tính và một chàng trai đôi chút ngông nghênh, cool ngầu - đâu sẽ là “Nụ Hôn Bạc Tỷ” của cô gái xinh đẹp?', 'http://localhost:5246/content/uploads/8d142124-a94d-4972-b486-492524ee42d3.jpg', 'http://localhost:5246/content/uploads/b9966776-174e-4922-9b32-2128ac928fe0.jpg', 'Hài hước', '2025-02-01 00:00:00.000000', 120, 8.0, '2025-04-11 03:42:50.110976', 8, '2025-04-18 16:45:21.025748', 8, '2025-05-01 00:00:00.000000', 'https://www.youtube.com/embed/wr6MeifZCUs'),
+(5, 'Nụ Hôn Bạc Tỷ', 'Câu chuyện xoay quanh Vân - cô gái bán bánh mì vô tình gặp phải hai chàng trai trong một tai nạn nhỏ. Làm thế nào khi tiếng sét ái tình đánh một lúc cả ba người? Liệu giữa một chàng trai chững chạc, nam tính và một chàng trai đôi chút ngông nghênh, cool ngầu - đâu sẽ là “Nụ Hôn Bạc Tỷ” của cô gái xinh đẹp?', 'http://localhost:5246/content/uploads/8d142124-a94d-4972-b486-492524ee42d3.jpg', 'http://localhost:5246/content/uploads/b9966776-174e-4922-9b32-2128ac928fe0.jpg', 'Hài hước', '2025-02-01 00:00:00.000000', 120, 8.0, '2025-04-11 03:42:50.110976', 8, '2025-05-06 22:24:02.915676', 8, '2025-05-01 00:00:00.000000', 'https://www.youtube.com/embed/wr6MeifZCUs'),
 (6, 'Avengers: Endgame', 'Siêu anh hùng tập hợp để cứu thế giới', 'http://localhost:5246/content/uploads/54ab0781-fd53-4994-912c-75e3fb97d7a2.jpg', 'http://localhost:5246/content/uploads/4822fce5-dfbd-4e09-8245-8710279681d6.png', 'Hành động', '2025-05-01 00:00:00.000000', 180, 9.0, '2025-04-11 04:12:26.956643', 8, '2025-04-16 12:32:53.191331', 8, '2025-05-30 00:00:00.000000', 'https://www.youtube.com/embed/TcMBFSGVi1c'),
 (7, 'Avengers: Doomsday', 'Siêu anh hùng tập hợp để cứu thế giới', 'http://localhost:5246/content/uploads/4cd4b915-e994-434e-97d9-e58b23774682.jpg', 'http://localhost:5246/content/uploads/7a16140d-d5a2-4444-84b4-43ddea51812a.jpg', 'Hành động', '2026-05-01 00:00:00.000000', 150, 8.5, '2025-04-11 04:12:26.956643', 8, '2025-04-16 12:34:12.157990', 8, '2026-06-30 00:00:00.000000', 'https://www.youtube.com/embed/aZXBFirj6b4'),
 (16, 'MẬT VỤ PHỤ HỒ', 'Levon Cade - cựu biệt kích tinh nhuệ thuộc lực lượng Thủy quân Lục chiến Hoàng gia Anh. Sau khi nghỉ hưu, anh sống cuộc đời yên bình là một công nhân xây dựng tại Chicago (Mỹ). Levon có mối quan hệ rất tốt với gia đình ông chủ Joe Garcia (Michael Peña). Một ngày nọ, cô con gái tuổi teen Jenny (Arianna Rivas) của Joe bị bắt cóc khiến chàng cựu quân nhân phải sử dụng lại các kỹ năng giết chóc của mình để giúp đỡ.', 'http://localhost:5246/content/uploads/fee31cf8-27a5-45c2-b59f-5848e40fb3f9.jpg', 'http://localhost:5246/content/uploads/b5bdd0b7-bace-4a78-ba79-077220376588.png', 'Hành động', '2025-04-04 00:00:00.000000', 116, 8.0, '2025-04-18 17:18:48.889317', 8, NULL, NULL, '2025-05-04 00:00:00.000000', 'https://www.youtube.com/embed/LYrmg2lRjCs'),
@@ -190,9 +190,7 @@ CREATE TABLE `screenings` (
 --
 
 INSERT INTO `screenings` (`Id`, `StartTime`, `EndTime`, `Price`, `MovieId`, `CinemaHallId`, `CreatedAt`, `CreatedById`, `UpdatedAt`, `UpdatedById`, `Status`) VALUES
-(3, '2025-04-27 17:00:00.000000', '2025-04-27 19:00:00.000000', 100000, 5, 2, '2025-04-16 19:18:42.509918', 8, '2025-05-06 11:29:26.323187', NULL, 'expired'),
-(4, '2025-04-19 19:30:00.000000', '2025-04-19 21:26:00.000000', 120000, 16, 5, '2025-04-19 07:47:22.167612', 8, '2025-05-06 11:29:26.323187', NULL, 'expired'),
-(6, '2025-05-06 16:31:00.000000', '2025-05-06 19:31:00.000000', 100000, 6, 2, '2025-05-06 11:32:18.662838', 8, NULL, NULL, 'upcoming');
+(6, '2025-05-06 16:31:00.000000', '2025-05-06 19:31:00.000000', 100000, 6, 2, '2025-05-06 11:32:18.662838', 8, '2025-05-06 22:01:35.105567', NULL, 'expired');
 
 -- --------------------------------------------------------
 
@@ -732,7 +730,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT for table `screenings`
 --
 ALTER TABLE `screenings`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `seats`

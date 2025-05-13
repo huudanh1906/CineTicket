@@ -41,9 +41,10 @@ const BookingStatisticsPage: React.FC = () => {
     };
 
     const formatCurrency = (amount: number) => {
-        return new Intl.NumberFormat('en-US', {
+        return new Intl.NumberFormat('vi-VN', {
             style: 'currency',
-            currency: 'USD'
+            currency: 'VND',
+            maximumFractionDigits: 0
         }).format(amount);
     };
 
@@ -222,22 +223,24 @@ const BookingStatisticsPage: React.FC = () => {
                                     <table className="table w-full">
                                         <thead>
                                             <tr>
-                                                <th>Movie ID</th>
-                                                <th>Title</th>
-                                                <th>Booking Count</th>
-                                                <th>Actions</th>
+                                                <th className="text-center">Movie ID</th>
+                                                <th className="text-left pl-9">Title</th>
+                                                <th className="text-center">Booking Count</th>
+                                                <th className="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {statistics.topMovies.map(movie => (
                                                 <tr key={movie.id}>
-                                                    <td>{movie.id}</td>
-                                                    <td className="flex items-center">
-                                                        <Film size={16} className="mr-2 text-gray-400" />
-                                                        {movie.title}
-                                                    </td>
-                                                    <td>{movie.bookingCount}</td>
+                                                    <td className="text-center">{movie.id}</td>
                                                     <td>
+                                                        <div className="flex items-center pl-1">
+                                                            <Film size={16} className="mr-2 text-gray-400" />
+                                                            <span>{movie.title}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="text-center">{movie.bookingCount}</td>
+                                                    <td className="text-center">
                                                         <button
                                                             onClick={() => navigate(`/admin/movies/${movie.id}`)}
                                                             className="btn btn-ghost btn-xs"

@@ -224,6 +224,12 @@ namespace Controllers.Admin
                 return BadRequest($"Movie duration must be greater than 0 minutes. Current duration: {movie.DurationMinutes} minutes");
             }
 
+            // Kiểm tra EndDate của phim
+            if (movie.EndDate.HasValue && movie.EndDate.Value < DateTime.Now)
+            {
+                return BadRequest($"Cannot create screenings for movie '{movie.Title}' because it has passed its end date ({movie.EndDate.Value:yyyy-MM-dd})");
+            }
+
             // Kiểm tra phòng chiếu tồn tại
             var cinemaHall = await _context.CinemaHalls.FindAsync(screeningDTO.CinemaHallId);
             if (cinemaHall == null)
@@ -369,6 +375,13 @@ namespace Controllers.Admin
                 return NotFound();
             }
 
+            // Check if the screening is expired
+            var vietnamNow = _timeZoneService.GetCurrentVietnamTime();
+            if (screening.EndTime < vietnamNow)
+            {
+                return BadRequest(new { message = "Cannot edit expired screenings" });
+            }
+
             // Kiểm tra xem suất chiếu đã có đặt vé chưa
             var hasBookings = await _context.Bookings
                 .AnyAsync(b => b.ScreeningId == id && b.BookingStatus != "Cancelled");
@@ -392,6 +405,12 @@ namespace Controllers.Admin
                 if (movie.DurationMinutes <= 0)
                 {
                     return BadRequest($"Movie duration must be greater than 0 minutes. Current duration: {movie.DurationMinutes} minutes");
+                }
+
+                // Kiểm tra EndDate của phim
+                if (movie.EndDate.HasValue && movie.EndDate.Value < DateTime.Now)
+                {
+                    return BadRequest($"Cannot update to movie '{movie.Title}' because it has passed its end date ({movie.EndDate.Value:yyyy-MM-dd})");
                 }
             }
             else
@@ -431,7 +450,6 @@ namespace Controllers.Admin
                 startTime = DateTime.SpecifyKind(vnStartTime, DateTimeKind.Unspecified);
 
                 // Kiểm tra thời gian bắt đầu không được nhỏ hơn thời gian hiện tại tại Việt Nam (UTC+7)
-                var vietnamNow = _timeZoneService.GetCurrentVietnamTime();
                 if (startTime <= vietnamNow)
                 {
                     return BadRequest($"Screening start time must be later than current time in Vietnam (UTC+7). Current time: {vietnamNow:yyyy-MM-dd HH:mm:ss}, Requested start time: {startTime:yyyy-MM-dd HH:mm:ss}");

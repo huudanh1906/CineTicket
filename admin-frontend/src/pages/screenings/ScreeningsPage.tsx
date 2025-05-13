@@ -580,13 +580,22 @@ const ScreeningsPage: React.FC = () => {
                                                         >
                                                             <Eye size={18} />
                                                         </Link>
-                                                        <Link
-                                                            to={`/admin/screenings/edit/${screening.id}`}
-                                                            className="text-blue-600 hover:text-blue-900 mx-2"
-                                                            title="Edit screening"
-                                                        >
-                                                            <Edit size={18} />
-                                                        </Link>
+                                                        {status.label === 'Expired' ? (
+                                                            <span
+                                                                className="text-blue-300 mx-2 opacity-50 cursor-not-allowed"
+                                                                title="Cannot edit expired screenings"
+                                                            >
+                                                                <Edit size={18} />
+                                                            </span>
+                                                        ) : (
+                                                            <Link
+                                                                to={`/admin/screenings/edit/${screening.id}`}
+                                                                className="text-blue-600 hover:text-blue-900 mx-2"
+                                                                title="Edit screening"
+                                                            >
+                                                                <Edit size={18} />
+                                                            </Link>
+                                                        )}
                                                         <button
                                                             onClick={() => handleDeleteClick(screening.id)}
                                                             className={`text-red-600 hover:text-red-900 mx-2 ${status.label !== 'Expired' ? 'opacity-50 cursor-not-allowed' : ''}`}

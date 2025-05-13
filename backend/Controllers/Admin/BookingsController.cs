@@ -196,10 +196,9 @@ namespace Controllers.Admin
             {
                 booking.PaymentStatus = statusUpdate.PaymentStatus;
 
-                // Nếu cập nhật trạng thái thanh toán thành "Completed" hoặc "Paid", 
+                // Nếu cập nhật trạng thái thanh toán thành "Completed", 
                 // và chưa có thời gian thanh toán, thì cập nhật thời gian thanh toán
-                if ((statusUpdate.PaymentStatus == "Completed" || statusUpdate.PaymentStatus == "Paid")
-                    && booking.PaidAt == null)
+                if (statusUpdate.PaymentStatus == "Completed" && booking.PaidAt == null)
                 {
                     booking.PaidAt = _timeZoneService.GetCurrentVietnamTime();
                 }
@@ -278,15 +277,15 @@ namespace Controllers.Admin
 
             // Thống kê doanh thu theo thời gian
             var revenueToday = await _context.Bookings
-                .Where(b => (b.PaymentStatus == "Completed" || b.PaymentStatus == "Paid") && b.CreatedAt >= today)
+                .Where(b => b.PaymentStatus == "Completed" && b.CreatedAt >= today)
                 .SumAsync(b => b.TotalAmount);
 
             var revenueThisWeek = await _context.Bookings
-                .Where(b => (b.PaymentStatus == "Completed" || b.PaymentStatus == "Paid") && b.CreatedAt >= today.AddDays(-7))
+                .Where(b => b.PaymentStatus == "Completed" && b.CreatedAt >= today.AddDays(-7))
                 .SumAsync(b => b.TotalAmount);
 
             var revenueThisMonth = await _context.Bookings
-                .Where(b => (b.PaymentStatus == "Completed" || b.PaymentStatus == "Paid") && b.CreatedAt >= today.AddDays(-30))
+                .Where(b => b.PaymentStatus == "Completed" && b.CreatedAt >= today.AddDays(-30))
                 .SumAsync(b => b.TotalAmount);
 
             // Số vé đã bán
@@ -322,7 +321,7 @@ namespace Controllers.Admin
                 paymentStatus = new
                 {
                     pending = await _context.Bookings.CountAsync(b => b.PaymentStatus == "Pending"),
-                    completed = await _context.Bookings.CountAsync(b => b.PaymentStatus == "Completed" || b.PaymentStatus == "Paid"),
+                    completed = await _context.Bookings.CountAsync(b => b.PaymentStatus == "Completed"),
                     failed = await _context.Bookings.CountAsync(b => b.PaymentStatus == "Failed")
                 },
                 paymentMethods = new
@@ -354,7 +353,7 @@ namespace Controllers.Admin
                     thisMonth = bookingsThisMonth
                 },
                 totalRevenue = await _context.Bookings
-                    .Where(b => b.PaymentStatus == "Completed" || b.PaymentStatus == "Paid")
+                    .Where(b => b.PaymentStatus == "Completed")
                     .SumAsync(b => b.TotalAmount),
                 revenueByTime = new
                 {

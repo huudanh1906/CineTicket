@@ -67,6 +67,8 @@ interface DashboardSummary {
     movies: {
         total: number;
         upcoming: number;
+        nowShowing: number;
+        ended: number;
     };
     topPerformers: {
         movies: {
@@ -214,7 +216,7 @@ const DashboardPage: React.FC = () => {
 
                 <StatCard
                     title="Phim đang chiếu"
-                    value={summary ? summary.movies.total - summary.movies.upcoming : 0}
+                    value={summary?.movies.nowShowing || 0}
                 />
             </div>
 

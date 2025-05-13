@@ -16,9 +16,16 @@ import {
 } from '@heroicons/react/24/outline';
 
 // Add a utility function to determine movie status
-const getMovieStatus = (releaseDate: string) => {
+const getMovieStatus = (releaseDate: string, endDate?: string) => {
     const today = new Date();
     const movieReleaseDate = new Date(releaseDate);
+
+    // Check if the movie has ended (if endDate exists and has passed)
+    if (endDate && today > new Date(endDate)) {
+        return 'Ended';
+    }
+
+    // Check if the movie is active or upcoming
     return movieReleaseDate <= today ? 'Active' : 'Upcoming';
 };
 
@@ -338,13 +345,21 @@ const MoviesPage: React.FC = () => {
                                                 <td className="admin-table-cell">{movie.durationMinutes} phút</td>
                                                 <td className="admin-table-cell">{formatDate(movie.releaseDate)}</td>
                                                 <td className="admin-table-cell">
-                                                    {/* Determine status based on release date */}
+                                                    {/* Determine status based on release date and end date */}
                                                     {(() => {
-                                                        const status = getMovieStatus(movie.releaseDate);
+                                                        const status = getMovieStatus(movie.releaseDate, movie.endDate);
                                                         return (
-                                                            <span className={`px-2 py-1 rounded-full text-xs ${status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                                                            <span className={`px-2 py-1 rounded-full text-xs ${status === 'Active'
+                                                                ? 'bg-green-100 text-green-800'
+                                                                : status === 'Upcoming'
+                                                                    ? 'bg-gray-100 text-gray-800'
+                                                                    : 'bg-red-100 text-red-800'
                                                                 }`}>
-                                                                {status === 'Active' ? 'Đang chiếu' : 'Sắp chiếu'}
+                                                                {status === 'Active'
+                                                                    ? 'Đang chiếu'
+                                                                    : status === 'Upcoming'
+                                                                        ? 'Sắp chiếu'
+                                                                        : 'Đã kết thúc'}
                                                             </span>
                                                         );
                                                     })()}

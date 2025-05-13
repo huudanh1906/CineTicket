@@ -73,7 +73,18 @@ namespace Controllers.Admin
 
             // Thống kê phim
             var totalMovies = await _context.Movies.CountAsync();
+
+            // Tính phim sắp chiếu (releaseDate > now)
             var upcomingMovies = await _context.Movies.CountAsync(m => m.ReleaseDate > now);
+
+            // Tính phim đang chiếu (releaseDate <= now và (endDate > now hoặc endDate là null))
+            var nowShowingMovies = await _context.Movies.CountAsync(m =>
+                m.ReleaseDate <= now &&
+                (m.EndDate == null || m.EndDate > now));
+
+            // Tính phim đã kết thúc (endDate <= now)
+            var endedMovies = await _context.Movies.CountAsync(m =>
+                m.EndDate != null && m.EndDate <= now);
 
             // Top phim đặt vé nhiều nhất trong tháng
             var topMovies = await _context.Movies
@@ -191,7 +202,9 @@ namespace Controllers.Admin
                 movies = new
                 {
                     total = totalMovies,
-                    upcoming = upcomingMovies
+                    upcoming = upcomingMovies,
+                    nowShowing = nowShowingMovies,
+                    ended = endedMovies
                 },
                 topPerformers = new
                 {

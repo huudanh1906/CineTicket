@@ -65,6 +65,10 @@ export interface MovieStatistics {
 const MoviesService = {
     getMovies: async (search = '', page = 1, pageSize = 10) => {
         const response = await api.get(`/admin/movies?search=${search}&page=${page}&pageSize=${pageSize}`);
+
+        // Debug data received from API
+        console.log('API Response data:', response.data);
+
         return {
             movies: response.data,
             total: parseInt(response.headers['x-total-count'] || '0'),
